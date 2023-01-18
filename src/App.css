@@ -1,0 +1,63 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#root{
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.App{
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.start--screen{
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 100px;
+  gap: 10px;
+}
+
+.start--text{
+  font-size: 5rem;
+}
+
+.start--button{
+    height: 65px;
+    width: 200px;
+    color: white;
+    background-color: #4D5B9E;
+    margin-top: 20px;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
+.start--button:active{
+  box-shadow: inset 1px 1px 10px #333;
+}
+
+.rightblob{
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 300px;
+  height: 300px;
+}
+
+.leftblob{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 300px;
+  height: 300px;
+}
