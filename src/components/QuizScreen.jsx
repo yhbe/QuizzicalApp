@@ -4,6 +4,7 @@ import rightBlob from "../images/rightBlob.png";
 
 export default function QuizScreen() {
   let [questions, setQuestions] = React.useState([]);
+  let [checkAnswers, setCheckAnswers] = React.useState(false);
 
   React.useEffect(() => {
     fetch("https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple")
@@ -28,7 +29,7 @@ export default function QuizScreen() {
       <div>
         <h2 className="question--title">{q.question}</h2>
         <>{possibleAns}</>
-        <hr />
+        <hr style={{ "margin-top": "20px" }} />
       </div>
     );
   });
@@ -38,8 +39,8 @@ export default function QuizScreen() {
       <div className="questions--container">
         {fullQuestions}
         <div className="questions--button-container">
-          <p>You scored 3/5 cocrrect answers</p>
-          <button>Play again</button>
+          {checkAnswers && <p>You scored 3/5 cocrrect answers</p>}
+          <button className="check--answer-button">Check Answers</button>
         </div>
       </div>
       <img src={rightBlob} className={"rightStyles"} />
