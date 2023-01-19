@@ -2,6 +2,7 @@ import React from "react";
 import leftBlob from "../images/leftBlob.png";
 import rightBlob from "../images/rightBlob.png";
 import { nanoid } from "nanoid";
+import { decode } from "html-entities";
 
 export default function QuizScreen() {
   let [questions, setQuestions] = React.useState([]);
@@ -23,16 +24,18 @@ export default function QuizScreen() {
     wrongAnswersArr.splice(randomIndex, 0, rightAnswer);
 
     let possibleAns = wrongAnswersArr.map((item) => {
+      let newItem = decode(item);
       return (
         <button key={nanoid()} className="questions--answer-button">
-          {item}
+          {newItem}
         </button>
       );
     });
 
+    let decodedQuestion = decode(q.question);
     return (
       <div key={nanoid()}>
-        <h2 className="question--title">{q.question}</h2>
+        <h2 className="question--title">{decodedQuestion}</h2>
         <>{possibleAns}</>
         <hr style={{ marginTop: "20px" }} />
       </div>
