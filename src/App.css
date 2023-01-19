@@ -32,18 +32,18 @@
 }
 
 .start--button{
-    height: 65px;
-    width: 200px;
-    color: white;
+  height: 65px;
+  width: 200px;
+  color: white;
     background-color: #4D5B9E;
     margin-top: 20px;
     border: none;
     font-size: 1.2rem;
     font-weight: bolder;
-}
+  }
 
-.start--button:active{
-  box-shadow: inset 1px 1px 10px #333;
+  .start--button:active{
+    box-shadow: inset 1px 1px 10px #333;
 }
 
 .rightblob{
@@ -111,10 +111,10 @@
 }
 
 .rightStyles{
-    width: 468px;
-    position: absolute;
-    right: 0;
-    z-index: 0;
+  width: 468px;
+  position: absolute;
+  right: 0;
+  z-index: 0;
 }
 
 .leftStyles{
@@ -122,4 +122,11 @@
   position: absolute;
   bottom: 0;
   z-index: 0
+}
+
+
+@media screen and (max-width: 800px) {
+  .questions--container{
+    width: 95%;
+  }
 }
