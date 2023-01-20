@@ -4,7 +4,7 @@ import StartScreen from "./components/StartScreen";
 import QuizScreen from "./components/QuizScreen";
 
 function App() {
-  const [newStart, setNewStart] = React.useState(false);
+  const [newStart, setNewStart] = React.useState(true);
 
   function setUpQuiz() {
     setNewStart(false);

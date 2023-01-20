@@ -2,7 +2,6 @@ import leftBlob from "../images/leftBlob.png";
 import rightBlob from "../images/rightBlob.png";
 
 export default function StartScreen(props) {
-  console.log(props);
   return (
     <div className="start--screen">
       <h1 className="start--text">Quizzical</h1>

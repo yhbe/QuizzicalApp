@@ -5,16 +5,11 @@ import { nanoid } from "nanoid";
 import { decode } from "html-entities";
 
 export default function QuizScreen() {
+  let [newGame, setNewGame] = React.useState(true);
   let [questions, setQuestions] = React.useState([]);
   let [checkAnswers, setCheckAnswers] = React.useState(false);
   let [amountCorrect, setAmountCorrect] = React.useState(0);
-  let [selectedAnswers, setSelectedAnswers] = React.useState([
-    { first: "" },
-    { Second: "" },
-    { Third: "" },
-    { Fourth: "" },
-    { Fithth: "" },
-  ]);
+  let [selectedAnswers, setSelectedAnswers] = React.useState([]);
 
   React.useEffect(() => {
     fetch("https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple")
@@ -39,11 +34,11 @@ export default function QuizScreen() {
 
         setQuestions(results);
       });
-  }, []);
+    setNewGame(true);
+  }, [newGame]);
 
   let fullQuestions = questions.map((q, index) => {
     let wrongAnswersArr = q.incorrect_answers;
-    console.log(questions);
     let possibleAns = wrongAnswersArr.map((item) => {
       let newItem = decode(item);
       return (
@@ -111,16 +106,21 @@ export default function QuizScreen() {
       return prevState;
     });
   }
-  console.log("Refreshed");
 
   function checkAnswersOnClick() {
-    console.log("Pressed");
     questions.map((q) => {
       if (q.answeredCorrectly) {
         setAmountCorrect((prevState) => prevState + 1);
       }
     });
     setCheckAnswers(true);
+  }
+
+  function restartGame() {
+    setNewGame(false);
+    setAmountCorrect(0);
+    setSelectedAnswers([]);
+    setCheckAnswers(false);
   }
 
   return (
@@ -133,12 +133,18 @@ export default function QuizScreen() {
               You scored {amountCorrect}/5 correct answers
             </p>
           )}
-          <button
-            onClick={checkAnswersOnClick}
-            className="check--answer-button"
-          >
-            {checkAnswers ? "Play Again" : "Check Answers"}
-          </button>
+          {checkAnswers ? (
+            <button onClick={restartGame} className="check--answer-button">
+              Play Again
+            </button>
+          ) : (
+            <button
+              onClick={checkAnswersOnClick}
+              className="check--answer-button"
+            >
+              Check Answers
+            </button>
+          )}
         </div>
       </div>
       <img src={rightBlob} className={"rightStyles"} />

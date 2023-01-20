@@ -109,6 +109,14 @@
 .check--answer-button{
   color: white;
   background-color: #4D5B9E;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.score{
+  color: #293264;
+  font-weight: bolder;
+  font-size: 1.4rem;
 }
 
 
@@ -118,7 +126,7 @@
 
 
 .targeted{
- background-color: #D6DBF5 !important;
+ background-color: #D6DBF5;
 }
 
 .rightStyles{
