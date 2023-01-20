@@ -7,6 +7,7 @@ import { decode } from "html-entities";
 export default function QuizScreen() {
   let [questions, setQuestions] = React.useState([]);
   let [checkAnswers, setCheckAnswers] = React.useState(false);
+  let [amountCorrect, setAmountCorrect] = React.useState(0);
 
   React.useEffect(() => {
     fetch("https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple")
@@ -18,19 +19,24 @@ export default function QuizScreen() {
             answeredCorrectly: false,
           };
         });
-        setQuestions(data.results);
+        let results = data.results;
+        results.map((q) => {
+          let rightAnswer = q.correct_answer;
+          let wrongAnswersArr = q.incorrect_answers;
+          //Placing the right answer randomly in the
+          //wrong answer arr to display on page
+          let length = wrongAnswersArr.length + 1;
+          let randomIndex = Math.trunc(Math.random() * length);
+          wrongAnswersArr.splice(randomIndex, 0, rightAnswer);
+        });
+
+        setQuestions(results);
       });
   }, []);
 
   let fullQuestions = questions.map((q, index) => {
-    let rightAnswer = q.correct_answer;
     let wrongAnswersArr = q.incorrect_answers;
-    //Placing the right answer randomly in the
-    //wrong answer arr to display on page
-    let length = wrongAnswersArr.length + 1;
-    let randomIndex = Math.trunc(Math.random() * length);
-    wrongAnswersArr.splice(randomIndex, 0, rightAnswer);
-
+    console.log(questions);
     let possibleAns = wrongAnswersArr.map((item) => {
       let newItem = decode(item);
       return (
@@ -83,12 +89,11 @@ export default function QuizScreen() {
   }
   console.log("Refreshed");
 
-  let number = 0;
   function checkAnswersOnClick() {
     console.log("Pressed");
     questions.map((q) => {
       if (q.answeredCorrectly) {
-        number++;
+        setAmountCorrect((prevState) => prevState + 1);
       }
     });
     setCheckAnswers(true);
@@ -99,7 +104,7 @@ export default function QuizScreen() {
       <div className="questions--container">
         {fullQuestions}
         <div className="questions--button-container">
-          {checkAnswers && <p>You scored 3/5 cocrrect answers</p>}
+          {checkAnswers && <p>You scored {amountCorrect}/5 correct answers</p>}
           <button
             onClick={checkAnswersOnClick}
             className="check--answer-button"
