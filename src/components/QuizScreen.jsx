@@ -81,6 +81,18 @@ export default function QuizScreen() {
       return prevState;
     });
   }
+  console.log("Refreshed");
+
+  let number = 0;
+  function checkAnswersOnClick() {
+    console.log("Pressed");
+    questions.map((q) => {
+      if (q.answeredCorrectly) {
+        number++;
+      }
+    });
+    setCheckAnswers(true);
+  }
 
   return (
     <div className="questions--main-container">
@@ -88,7 +100,12 @@ export default function QuizScreen() {
         {fullQuestions}
         <div className="questions--button-container">
           {checkAnswers && <p>You scored 3/5 cocrrect answers</p>}
-          <button className="check--answer-button">Check Answers</button>
+          <button
+            onClick={checkAnswersOnClick}
+            className="check--answer-button"
+          >
+            Check Answers
+          </button>
         </div>
       </div>
       <img src={rightBlob} className={"rightStyles"} />
