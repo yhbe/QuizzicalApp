@@ -104,12 +104,16 @@ export default function QuizScreen() {
       <div className="questions--container">
         {fullQuestions}
         <div className="questions--button-container">
-          {checkAnswers && <p>You scored {amountCorrect}/5 correct answers</p>}
+          {checkAnswers && (
+            <p className="score">
+              You scored {amountCorrect}/5 correct answers
+            </p>
+          )}
           <button
             onClick={checkAnswersOnClick}
             className="check--answer-button"
           >
-            Check Answers
+            {checkAnswers ? "Play Again" : "Check Answers"}
           </button>
         </div>
       </div>
