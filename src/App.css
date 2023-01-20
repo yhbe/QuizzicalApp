@@ -85,6 +85,11 @@
   z-index: 1;
 }
 
+.question--title{
+  font-size: 1.7rem;
+  font-family: 'Karla', sans-serif;
+}
+
 .questions--button-container{
   display: flex;
   width: 100%;
@@ -108,6 +113,11 @@
 
 .check--answer-button:active{
   box-shadow: inset 1px 1px 10px #333;
+}
+
+
+.targeted{
+  background-color: #D6DBF5;
 }
 
 .rightStyles{

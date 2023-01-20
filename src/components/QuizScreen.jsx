@@ -11,10 +11,18 @@ export default function QuizScreen() {
   React.useEffect(() => {
     fetch("https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple")
       .then((res) => res.json())
-      .then((data) => setQuestions(data.results));
+      .then((data) => {
+        data.results = data.results.map((item) => {
+          return {
+            ...item,
+            answeredCorrectly: false,
+          };
+        });
+        setQuestions(data.results);
+      });
   }, []);
 
-  let fullQuestions = questions.map((q) => {
+  let fullQuestions = questions.map((q, index) => {
     let rightAnswer = q.correct_answer;
     let wrongAnswersArr = q.incorrect_answers;
     //Placing the right answer randomly in the
@@ -26,7 +34,11 @@ export default function QuizScreen() {
     let possibleAns = wrongAnswersArr.map((item) => {
       let newItem = decode(item);
       return (
-        <button key={nanoid()} className="questions--answer-button">
+        <button
+          onClick={(event) => onClick(event, item, index)}
+          key={nanoid()}
+          className="questions--answer-button"
+        >
           {newItem}
         </button>
       );
@@ -34,13 +46,41 @@ export default function QuizScreen() {
 
     let decodedQuestion = decode(q.question);
     return (
-      <div key={nanoid()}>
+      <div id={index} key={nanoid()}>
         <h2 className="question--title">{decodedQuestion}</h2>
-        <>{possibleAns}</>
+        <div>
+          <>{possibleAns}</>
+        </div>
         <hr style={{ marginTop: "20px" }} />
       </div>
     );
   });
+
+  function onClick(event, item, questionIndex) {
+    let possibleAnswers = event.target.parentElement.children;
+
+    //resetting classes
+    for (let answer of possibleAnswers) {
+      answer.classList.remove("targeted");
+    }
+    //styling clicked answer
+    let clickedAnswer = event.target;
+    clickedAnswer.classList.add("targeted");
+
+    //If correct answer is selected changes
+    //state and sets that question to answeredCorrectly
+    setQuestions((prevState) => {
+      prevState.map((q, index) => {
+        if (questionIndex === index) {
+          if (q.correct_answer === item) {
+            q.answeredCorrectly = true;
+          } else q.answeredCorrectly = false;
+        }
+        return { ...q };
+      });
+      return prevState;
+    });
+  }
 
   return (
     <div className="questions--main-container">
