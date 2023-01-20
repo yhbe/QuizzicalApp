@@ -118,7 +118,7 @@
 
 
 .targeted{
-  background-color: #D6DBF5;
+ background-color: #D6DBF5 !important;
 }
 
 .rightStyles{
@@ -140,4 +140,12 @@
   .questions--container{
     width: 95%;
   }
+}
+
+.rightAnswer{
+  background-color: #94D7A2!important;
+}
+
+.actualAnswer{
+  background-color: #F8BCBC
 }

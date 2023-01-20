@@ -8,6 +8,13 @@ export default function QuizScreen() {
   let [questions, setQuestions] = React.useState([]);
   let [checkAnswers, setCheckAnswers] = React.useState(false);
   let [amountCorrect, setAmountCorrect] = React.useState(0);
+  let [selectedAnswers, setSelectedAnswers] = React.useState([
+    { first: "" },
+    { Second: "" },
+    { Third: "" },
+    { Fourth: "" },
+    { Fithth: "" },
+  ]);
 
   React.useEffect(() => {
     fetch("https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple")
@@ -43,7 +50,19 @@ export default function QuizScreen() {
         <button
           onClick={(event) => onClick(event, item, index)}
           key={nanoid()}
-          className="questions--answer-button"
+          //If checking answers colors the selected answer Green
+          //If selected answer is wrong colors the right answer red.
+          className={`questions--answer-button  ${
+            checkAnswers && questions[index].correct_answer === item
+              ? "actualAnswer"
+              : ""
+          } ${
+            selectedAnswers.find((i) => i === item)
+              ? checkAnswers
+                ? "rightAnswer"
+                : "targeted"
+              : ""
+          }`}
         >
           {newItem}
         </button>
@@ -63,6 +82,11 @@ export default function QuizScreen() {
   });
 
   function onClick(event, item, questionIndex) {
+    setSelectedAnswers((prevState) => {
+      prevState[questionIndex] = item;
+      return prevState;
+    });
+
     let possibleAnswers = event.target.parentElement.children;
 
     //resetting classes
