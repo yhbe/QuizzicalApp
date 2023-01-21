@@ -2,7 +2,19 @@
 
 This project is a a trivia app
 
-Created With React, Vite, Javascript
+# Goal
+- Two screens (Start and Questions)
+- Pull questions from external API
+- Tally correct answers
+- Styled and polished 
+
+## Created with
+
+React, Vite, Javascript
+
+### Reference Material
+
+https://www.figma.com/file/E9S5iPcm10f0RIHK8mCqKL/Quizzical-App?node-id=0%3A1&t=Iu1QGZ5wpeg1vVo8-0
 
 ## Results
 
