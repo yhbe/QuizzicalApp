@@ -10,7 +10,7 @@ This project is a a trivia app
 
 ## Created with
 
-React, Vite, Javascript
+React, Vite, Javascript, Css, JSX
 
 ## Results
 
