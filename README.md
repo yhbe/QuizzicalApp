@@ -1,5 +1,7 @@
 # Quizzical App
 
+Play here [Quizzical](https://yhbe.github.io/QuizzicalApp/)
+
 This project is a a trivia app
 
 # Goal
